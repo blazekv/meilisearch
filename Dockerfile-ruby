@@ -1,0 +1,7 @@
+FROM ruby:3.2.0
+
+COPY ./ruby /home
+WORKDIR /home
+RUN bundler install
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]

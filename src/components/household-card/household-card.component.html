@@ -1,0 +1,55 @@
+<mat-card *ngIf="household">
+
+
+<mat-card-header *ngIf="household" class="mat-z-4">
+
+  <mat-card-title>{{household.iso3}} - <span [innerHTML]="household._formatted?.shelterStatus"></span></mat-card-title>
+  <mat-card-subtitle>Members: {{household.members.length}}  Livelihood: {{household.livelihood}}</mat-card-subtitle>
+</mat-card-header>
+<mat-card-content>
+
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+    <mat-tab label="Info">
+      <div class="basic-info">
+        <div>
+          <div>
+            <strong>Income level:</strong> {{household?.incomeLevel}}<br />
+            <strong>Debt level:</strong> {{household?.debtLevel}}<br />
+            <strong>House income:</strong> {{household?.houseIncome}}<br />
+            <div>
+              <span [innerHTML]="household._formatted?.notes"></span>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <strong>Address</strong>
+          <div>
+            <strong>Street:</strong>  <span [innerHTML]="household._formatted?.residenceAddress?.street"></span><br />
+            <strong>Number:</strong> {{household.residenceAddress.number}}<br />
+            <strong>Post code:</strong> {{household.residenceAddress.postcode}}<br />
+          </div>
+        </div>
+        <div>
+          <app-map [latitude]="household._geo.lat" [longitude]="household._geo.lng"></app-map>
+        </div>
+      </div>
+
+    </mat-tab>
+    <mat-tab *ngFor="let member of household.members" label="{{member.enGivenName}} {{ member.enFamilyName}}">
+      <div>
+        <strong>Name:</strong> {{member.localFamilyName}} {{ member.localGivenName}} <br />
+        <strong>Gender:</strong> {{member.gender}}<br />
+        <strong>Date of birth:</strong> {{member.dateOfBirth | date}}<br />
+        <strong>Head:</strong> {{member.head}}<br />
+
+      </div>
+    </mat-tab>
+
+  </mat-tab-group>
+
+
+  <mat-divider></mat-divider>
+</mat-card-content>
+<mat-card-footer>
+
+</mat-card-footer>
+</mat-card>

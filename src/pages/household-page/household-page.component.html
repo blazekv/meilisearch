@@ -1,0 +1,52 @@
+<div class="search" [formGroup]="form">
+  <mat-form-field  appearance="fill">
+    <mat-label>Search...</mat-label>
+    <input matInput formControlName="search">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Searchable Fields</mat-label>
+    <mat-select formControlName="searchableFields" multiple>
+      <mat-option value="shelterStatus">Shelter status</mat-option>
+      <mat-option value="notes">Notes</mat-option>
+      <mat-option value="residenceAddress.street">Street</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="filter"  appearance="fill" >
+    <mat-label>Filter...</mat-label>
+    <input matInput formControlName="filter" >
+    <mat-icon matSuffix>filter_alt</mat-icon>
+  </mat-form-field>
+
+  <div class="geo-toggle">
+    <mat-slide-toggle (change)="switchGeo($event)"  >Geo search</mat-slide-toggle>
+  </div>
+  <div *ngIf="form.get('geo')" formGroupName="geo">
+
+    <mat-form-field>
+      <mat-label>Longitude</mat-label>
+      <input type="number" matInput formControlName="longitude">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Latitude</mat-label>
+      <input type="number" matInput formControlName="latitude">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Radius [km]</mat-label>
+      <input type="number" matInput formControlName="radius">
+    </mat-form-field>
+  </div>
+
+
+</div>
+
+<div *ngIf="meiliSearchResponse$ | async as response">
+  <app-meili-stats [response]="response"></app-meili-stats>
+
+  <div class="households">
+    <app-household-card *ngFor="let household of response.hits" [household]="household"></app-household-card>
+
+  </div>
+</div>
+

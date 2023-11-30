@@ -1,0 +1,45 @@
+
+<ng-container *ngIf="response">
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-subtitle>Processing time</mat-card-subtitle>
+      <mat-card-title>{{response.processingTimeMs}} ms</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+    </mat-card-content>
+
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-subtitle>Estimated hits</mat-card-subtitle>
+      <mat-card-title>{{response.estimatedTotalHits}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+    </mat-card-content>
+
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-subtitle>Facets</mat-card-subtitle>
+      <mat-card-title>
+        <div class="facets">
+          <div *ngFor="let item of response.facetDistribution['iso3'] | keyvalue">
+            {{item.key}}: {{item.value}}
+          </div>
+        </div>
+
+
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+    </mat-card-content>
+
+  </mat-card>
+
+</ng-container>
