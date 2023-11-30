@@ -18,6 +18,6 @@ export const appConfig: ApplicationConfig = {
       useClass: TokenInterceptor,
       multi: true,
     },
-    {provide: MEILI_API_KEY, useValue: 'QlVr4fnua5dZrLH'},
+    {provide: MEILI_API_KEY, useValue: 'quantiPass1234'},
   ]
 };
